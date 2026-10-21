@@ -1,61 +1,109 @@
-# Inventory & Order Management System
+# Inventory Management System
 
-A full-stack inventory and order management application. The backend is a REST API built with **ASP.NET Core 8** and **Entity Framework Core**; the frontend is a **React** single-page app that consumes it.
+A full-stack Inventory Management System built with **ASP.NET Core 8 Web API, React, Entity Framework Core, and SQLite** to manage products, monitor stock levels, and handle customer orders.
 
-Built to demonstrate end-to-end ownership of a real application — database design, backend business logic, and a working front-end UI — rather than just a front-end or back-end piece in isolation.
+## Overview
 
-## Features
-
-- **Dashboard** — live stats (product count, stock value, revenue), low-stock alerts, recent orders
-- **Products** — full CRUD (create, read, update, delete) with SKU, category, price, and stock tracking
-- **Orders** — build an order from available stock, place it, and watch stock levels update automatically; order history with line-item detail
-- **Business logic on the server** — the API validates stock availability and rejects orders that would oversell a product; stock deduction happens inside a database transaction
+This project demonstrates full-stack development using a RESTful API backend and a React frontend. It provides product management, low-stock visibility, and order processing with persistent data storage.
 
 ## Tech Stack
 
-**Backend**
-- ASP.NET Core 8 Web API (controller-based)
-- Entity Framework Core 8 with SQLite (zero-setup local database; swappable for SQL Server)
-- Swagger / OpenAPI for interactive API docs
-- CORS configured for the React dev server
+### Backend
+- C#
+- .NET 8
+- ASP.NET Core Web API
+- Entity Framework Core
+- SQLite
+- Swagger / OpenAPI
 
-**Frontend**
-- React 18 (functional components, hooks)
-- Vite for local dev and builds
-- Plain CSS, no UI framework
+### Frontend
+- React
+- Vite
+- JavaScript
+- HTML5 and CSS3
+
+### Development Tools
+- Visual Studio / Visual Studio Code
+- Git and GitHub
+- npm
+
+## Features
+
+### Product Management
+- Create, view, update, and delete products.
+- View individual product details.
+- Identify products with low stock.
+
+### Order Management
+- Manage customer order information.
+- Add products to orders with quantities and unit prices.
+- Calculate order totals.
+- Store order and order-item data in SQLite.
+
+### API Development
+- RESTful endpoints built with ASP.NET Core Web API.
+- Entity Framework Core for database operations.
+- Swagger / OpenAPI for exploring and testing API endpoints.
+
+### User Interface
+- React-based frontend powered by Vite.
+- Frontend integration with the backend API.
+- Separate frontend and backend applications.
 
 ## Project Structure
 
-```
-inventory-fullstack/
+```text
+inventory-management-system/
 ├── backend/
-│   └── InventoryApi/
-│       ├── Controllers/       # ProductsController, OrdersController
-│       ├── Models/            # Product, Order, OrderItem
-│       ├── Data/              # AppDbContext, DbSeeder
-│       └── Program.cs
-└── frontend/
-    └── src/
-        ├── components/        # Dashboard, Products, Orders
-        ├── api.js             # All API calls in one place
-        └── App.jsx
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Data/
+│   └── ...
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── ...
+├── .gitignore
+└── README.md
 ```
 
-## Running It Locally
+*Note: The folder names shown inside `backend/` are illustrative. Your actual structure may differ.*
 
-You need two terminals — one for the API, one for the React app.
+## Prerequisites
 
-### 1. Backend (ASP.NET Core API)
+Install the following before running the application:
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Node.js and npm](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+
+## Getting Started
+
+### 1. Clone the Repository
 
 ```bash
-cd backend/InventoryApi
+git clone https://github.com/abuostar101-glitch/inventory-management-system.git
+cd inventory-management-system
+```
+
+### 2. Run the Backend
+
+Open a terminal in the repository root:
+
+```bash
+cd backend
 dotnet restore
 dotnet run
 ```
 
-The API starts at `http://localhost:5080`. On first run it creates a local SQLite database (`inventory.db`) and seeds it with sample products. Visit `http://localhost:5080/swagger` to explore and test the API directly.
+If the backend contains multiple project files, run `dotnet run --project` with the path to the correct `.csproj` file.
 
-### 2. Frontend (React)
+Check the terminal output for the actual backend URL and port. Open the Swagger URL shown by the application, if Swagger is enabled in the current environment.
+
+### 3. Run the Frontend
+
+Open a second terminal:
 
 ```bash
 cd frontend
@@ -63,18 +111,43 @@ npm install
 npm run dev
 ```
 
-Open the URL Vite prints (usually `http://localhost:5173`). The app talks to the API automatically — make sure the backend is running first.
+Open the local frontend URL printed by Vite in your terminal. The development server commonly uses `http://localhost:5173`.
 
-## What This Project Demonstrates
+### 4. Database Configuration
 
-- Designing a relational schema (products, orders, order items) with EF Core
-- Writing REST API endpoints with proper status codes (200, 201, 204, 400, 404)
-- Server-side business rules: stock validation, transactional updates
-- Connecting a React front-end to a real backend via `fetch`
-- State management across multiple views (Dashboard, Products, Orders) using React hooks
-- CORS configuration between two locally running applications
+The application uses SQLite with Entity Framework Core.
+
+Before running the project, check the backend configuration for the database connection string and confirm how the application creates or initializes the database. If migrations are configured, apply the required migrations before using the application.
+
+Ensure that the frontend API base URL matches the backend URL, and that the backend's CORS configuration permits the frontend development origin.
+
+## Learning Outcomes
+
+Through this project, I practised:
+
+- Building RESTful APIs with ASP.NET Core.
+- Using Entity Framework Core for database access.
+- Designing relational data models for products and orders.
+- Integrating a React frontend with a .NET backend.
+- Implementing CRUD operations and order-processing workflows.
+- Exploring and testing API endpoints using Swagger / OpenAPI.
+- Managing source code with Git and GitHub.
+
+## Future Improvements
+
+- Add authentication and role-based access control.
+- Implement automated unit and integration tests.
+- Add pagination, filtering, and search.
+- Improve validation and error handling.
+- Deploy the application to a cloud hosting platform.
 
 ## Author
 
-**Abubakar A**
-[LinkedIn](https://linkedin.com/in/abubakar-dotnet-dev) · [GitHub](https://github.com/abuostar101-glitch)
+**Abubakar A.**
+
+- GitHub: [abuostar101-glitch](https://github.com/abuostar101-glitch)
+- Project Repository: [Inventory Management System](https://github.com/abuostar101-glitch/inventory-management-system)
+
+---
+
+*Developed as a full-stack learning project to strengthen practical skills in .NET development, database management, REST APIs, and React.*
