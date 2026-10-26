@@ -20,3 +20,5 @@
 
 # IDE
 .vscode/
+.neon
+node_modules/
